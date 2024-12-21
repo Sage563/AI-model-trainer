@@ -8,12 +8,6 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Embedding, LSTM, concatenate, Input
 
 
-def get_training_data_folder():
-    while True:
-        folder = input("Please enter the path to the folder containing training images and text data: ")
-        if os.path.isdir(folder):
-            return folder
-        print("The provided path is not a valid directory. Please try again.")
 
 
 def create_image_model(input_shape):
@@ -138,7 +132,7 @@ def train_image_model(image_folder, output_path, mode):
     print(f"Image model saved to {output_path}")
 
 
-def main(output_path, mode):
+def main(output_path, mode ,fold):
     """
     Main function for training models.
     
@@ -149,7 +143,9 @@ def main(output_path, mode):
                     2: Train image generation model.
                     3: Train image classification model.
     """
-    folder = get_training_data_folder()
+    folder = fold
+    if os.path.isdir(folder):
+        return folder
     if mode == 1:
         text_folder = os.path.join(folder, "texts")
         train_text_model(text_folder, output_path)
