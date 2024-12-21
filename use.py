@@ -1,2 +1,4 @@
 import api
-api.main()
+api.main("train.h5",1)
+
+print("Model created")
