@@ -1,18 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<history>
-    <fact>
-        <text>Albert Einstein developed the theory of relativity.</text>
-    </fact>
-    <fact>
-        <text>Isaac Newton discovered gravity.</text>
-    </fact>
-    <fact>
-        <text>The Wright brothers invented the first successful airplane.</text>
-    </fact>
-    <fact>
-        <text>Marie Curie discovered radium and polonium.</text>
-    </fact>
-    <fact>
-        <text>Alexander Graham Bell invented the telephone.</text>
-    </fact>
-</history>
+<training_data>
+    <!-- Text Data -->
+    <text>
+        <content>Breaking news: The stock market has seen a significant rise today.</content>
+        <label>news</label>
+    </text>
+    <text>
+        <content>The local football team secured a thrilling victory last night.</content>
+        <label>sports</label>
+    </text>
+    <text>
+        <content>The movie premiere attracted a large audience and rave reviews.</content>
+        <label>entertainment</label>
+    </text>
+    <text>
+        <content>The government announced new economic reforms during a press conference.</content>
+        <label>news</label>
+    </text>
+    <text>
+        <content>The tennis championship begins tomorrow with high expectations.</content>
+        <label>sports</label>
+    </text>
+    <text>
+        <content>The upcoming music festival will feature top international artists.</content>
+        <label>entertainment</label>
+    </text>
+</training_data>
