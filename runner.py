@@ -107,6 +107,7 @@ def main(model_path, mode, tokenizer=None, max_sequence_length=None, input_text=
         )
         
         return most_probable_label
+        #return probabilities
     elif mode in [2, 3]:  # Image models
         if not image_path:
             raise ValueError("For image mode, image_path is required.")
