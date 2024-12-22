@@ -74,13 +74,14 @@ def create_text_model(max_sequence_length, vocab_size):
     return text_input, text_output
 
 
-def train_text_model(text_data, output_path):
+def train_text_model(text_data, output_path, max_sequence_length=None):
     """
     Trains a text classification model.
 
     Args:
         text_data (list): A list of tuples (text, label).
         output_path (str): Path to save the trained model.
+        max_sequence_length (int, optional): Maximum sequence length for text inputs. If None, it is computed from the data.
     """
     texts, labels = zip(*text_data)
 
@@ -92,7 +93,11 @@ def train_text_model(text_data, output_path):
     if not sequences:
         raise ValueError("No sequences generated. Check if text data is valid.")
 
-    max_sequence_length = max(len(seq) for seq in sequences)
+    # Compute or set the max sequence length
+    if max_sequence_length is None:
+        max_sequence_length = max(len(seq) for seq in sequences)
+
+    # Pad sequences
     padded_sequences = pad_sequences(sequences, maxlen=max_sequence_length, padding="post")
     vocab_size = len(tokenizer.word_index) + 1
 
@@ -176,7 +181,7 @@ def train_image_model(image_folder, output_path, mode):
     print(f"Image model saved to {output_path}")
 
 
-def main(xml_path, image_folder, output_path, mode):
+def main(xml_path, image_folder, output_path, mode, max_sequence_length=None):
     """
     Main function for training models.
 
@@ -188,6 +193,7 @@ def main(xml_path, image_folder, output_path, mode):
                     1: Train text model.
                     2: Train image generation model.
                     3: Train image classification model.
+        max_sequence_length (int, optional): Maximum sequence length for text inputs. Defaults to None.
     """
     if mode == 1:  # Train text model
         if not xml_path:
@@ -195,7 +201,7 @@ def main(xml_path, image_folder, output_path, mode):
         text_data = parse_text_data_from_xml(xml_path)
         if not text_data:
             raise ValueError("No text data available in the XML file.")
-        train_text_model(text_data, output_path)
+        train_text_model(text_data, output_path, max_sequence_length)
     elif mode in [2, 3]:  # Train image models
         if not os.path.isdir(image_folder):
             raise FileNotFoundError(f"Image folder not found: {image_folder}")
@@ -205,8 +211,11 @@ def main(xml_path, image_folder, output_path, mode):
 
 
 # Example usage:
-# Train text model using XML data
-# main("training_data.xml", None, "output_text_model.h5", 1)
+# Train text model using XML data with default max sequence length
+# main("training_data.xml", None, "text_model.h5", 1)
+
+# Train text model with a custom max sequence length
+# main("training_data.xml", None, "text_model.h5", 1, max_sequence_length=100)
 
 # Train image classification model using image directory
-# main(None, "path/to/image_folder", "output_image_model.h5", 3)
+# main(None, "path/to/image_folder", "image_model.h5", 3)
