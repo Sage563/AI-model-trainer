@@ -10,7 +10,7 @@ answ = runner.main(
     mode=1,
     tokenizer=tokenizer,
     max_sequence_length=100,
-    input_text="The government announced new reforms.",
+    input_text="sports",
     label_encoder=label_encoder
 )
 
